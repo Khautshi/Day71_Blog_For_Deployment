@@ -38,7 +38,6 @@ def admin_only(f):
     return decorated_function
 
 
-app.config['SECRET_KEY'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -49,7 +48,7 @@ def load_user(user_id):
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
 db.init_app(app)
 
